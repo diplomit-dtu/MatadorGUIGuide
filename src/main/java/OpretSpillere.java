@@ -37,6 +37,8 @@ public class OpretSpillere {
         // Bemærk: Johns bil er der kun én gang, fordi vi huskede at fjerne bilen
         // fra felt 9, inden vi sat den på felt 10
 
+        // Ændrer Johns balance til 10000
+        player3.setBalance(10000);
     }
 
 }
