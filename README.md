@@ -132,7 +132,7 @@ Man tilføjer spillere ved at oprette instanser af `GUI_Player`-klassen, og tilf
 // Opretter spiller med navnet Stephen og start balance på 2000
 GUI_Player player = new GUI_Player("Stephen", 2000);
 
-// Tilføjer ham til spiller
+// Tilføjer ham til spillet
 gui.addPlayer(player);
 ```
 
@@ -148,7 +148,7 @@ player.setBalance(10000);
 En spillers bil/brik er ikke på brættet før den manuelt bliver placeret. Dette gøres ved at hente feltet vi ønsker at placere spilleren på (se '[Tilgå felter](#tilgå-felter)'), og benytter feltets `setCar`-metode.
 
 ```java
-// Opretter siller
+// Opretter spiller
 GUI_Player player = new GUI_Player("Stephen", 2000);
 gui.addPlayer(player);
 
@@ -182,7 +182,7 @@ gui.getFields()[4].setCar(player, false);
 ## Bræt og felter
 
 ### Tilgå felter
-Man kan tilgå felterne på brættet ved at bruge `GUI`-objektets `getFields()`-metode. Den returnere et _array_ af felterne, hvor indeks 0 er startfeltet.
+Man kan tilgå felterne på brættet ved at bruge `GUI`-objektets `getFields()`-metode. Den returnerer et _array_ af felterne, hvor indeks 0 er startfeltet.
 
 ```java
 GUI_Field field;
@@ -224,7 +224,7 @@ Ejendomme kendetegnes ved at de har en _pris_, en _ejer_ samt en _leje_, og neda
  - Bryggerier (`GUI_Brewery`)
  - Rederier (`GUI_Shipping`)
 
-Disse felttyper har nogle yderligere metoder til fælles, der kan tilgås ved _cast_ et `GUI_Field` til et `GUI_Ownable`:
+Disse felttyper har nogle yderligere metoder til fælles, der kan tilgås ved at _caste_ et `GUI_Field` til et `GUI_Ownable`:
 
 ```java
 // Cast felt til GUI_Ownable
@@ -235,7 +235,7 @@ GUI_Ownable ownable = (GUI_Ownable) field;
 De fælles metoder er:
 
  - __Sæt pris:__ `setSubText("Pris: 1000")`  
-    Ejendomme benytter sin undertitel til at vise prisen sin pris, og kan derfor ændres med denne metode.
+    Ejendomme benytter undertitlen til sin pris, og prisen kan derfor ændres med denne metode.
 
  - __Sæt ejer:__ `setOwnerName("Albert")`  
     Sætter navnet på spilleren, der ejer feltet. Brug `setOwnerName(null)` for at fjerne nuværende ejer.  
@@ -249,7 +249,7 @@ De fælles metoder er:
 ### Huse og hoteller
 _Eksekverbart eksempel: `HuseOgHoteller.java`_ 
 
-Veje, der har typen `GUI_Street` kan have huse eller et hotel på sig. For at tilgå dette, skal man _cast_ feltet til `GUI_Street`:
+Veje, der har typen `GUI_Street` kan have huse eller et hotel på sig. For at tilgå dette, skal man _caste_ feltet til `GUI_Street`:
 
 ```java
 // Caster felt 1 til GUI_Street
@@ -269,7 +269,7 @@ Nu kan man ændre antallet af huse og hoteller:
 ### Brugerdefineret bræt
 _Eksekverbart eksempel: `BrugerdefineretBraet.java`_ 
 
-Man kan selv vælge hvilket felter man ønsker på brættet ved at lave sit eget _array_ af felter og give det til `GUI`-konstruktøren: 
+Man kan selv vælge hvilke felter man ønsker på brættet ved at lave sit eget _array_ af felter og give det til `GUI`-konstruktøren: 
 
 ```java
 // Laver ét af hvert felt 
@@ -290,13 +290,13 @@ GUI gui = new GUI(fields);
 ## Input og output
 _Eksekverbart eksempel: `InputOutput.java`_ 
 
-Alle metoder der tager imod inputs og viser output har følgende tilføldes:
+Alle metoder der tager imod inputs og viser output har følgende tilfælles:
  - De ligger i GUI-objektet
- - De blokere indtil brugeren har taget et valg eller trykket _Ok_
+ - De blokerer indtil brugeren har taget et valg eller trykket _Ok_
 
 
 ### Vis tekst
-Man kan viser en tekstbesked til brugeren med metoden `showMessage(..)`. Teksten vises indtil brugeren trykker _OK_ 
+Man kan vise en tekstbesked til brugeren med metoden `showMessage(..)`. Teksten vises indtil brugeren trykker _OK_ 
 
 ```java
     gui.showMessage("Hello World");
@@ -350,7 +350,7 @@ Metoden `getUserString(..)` beder brugeren om at indtaste en vilkårlig tekststr
 String stringInput = gui.getUserString("Enter some text");
 ```
 
-Returværdien kan være en tom tekstreng, da brugeren kan undlade at indtaste noget.
+Returværdien kan være en tom tekststreng, da brugeren kan undlade at indtaste noget.
 
 
 ### Tag imod tal
@@ -360,11 +360,11 @@ Metoden `getUserInteger(..)` beder brugeren om at indtaste en vilkårlig tal-væ
 int numberInput = gui.getUserInteger("Enter a number");
 ```
 
-___OBS:___ Man kan angive et grænse for værdierne brugeren kan indtaste, men dette anbefales __ikke__ da der er en bug i metoden på nuværende tidspunkt.
+___OBS:___ Man kan angive en grænse for værdierne brugeren kan indtaste, men dette anbefales __ikke__ da der er en bug i metoden på nuværende tidspunkt.
 
 
 ### Boolsk-knap
-Metoden `getUserLeftButtonPressed(..)` beder brugeren om at vælge én af to knapper, og returnere en _boolean_ værdi i stedet for tekst:
+Metoden `getUserLeftButtonPressed(..)` beder brugeren om at vælge én af to knapper, og returnerer en _boolean_ værdi i stedet for _string_:
 
 ```java
 // En Ja/Nej-knap
