@@ -1,9 +1,34 @@
 # Guide til Matador GUI
+
 Dette er en import- og brugsguide til [Matador GUI'en](https://github.com/diplom-dtu/Matador_GUI), der benyttes til CDIO projekterne på første semester.
 
-__Kørbare eksempler__  
+__Eksekverbare eksempler__  
 Repositoriet her er et projekt, der kan klones til IntelliJ, og indeholder forskellige eksekverbare eksempler på brugen af GUI'en i mappen `src/main/java`.
 
+## Indhold
+__[Import](#import)__  
+__[Brug af GUI](#brug-af-gui)__
+ - __[JavaDoc i IntelliJ](#javadoc-i-intellij)__
+ - __[Start GUI](#start-gui)__  
+ - __[Spillere](#spillere)__
+   - __[Opret og tilføj](#opret-og-tilføj)__
+   - __[Ændre balance/point](#ændre-balance/point)__
+   - __[Placer bil](#placer-bil)__
+   - __[Ryk bil](#ryk-bil)__
+ - __[Bræt og felter](#bræt-og-felter)__
+     - __[Tilgå felter](#tilgå-felter)__
+     - __[Ændre feltinformationer](#ændre-feltinformationer)__
+     - __[Ejendomme](#ejendomme)__
+     - __[Huse og hoteller](#huse-og-hoteller)__
+     - __[Brugerdefineret bræt](#brugerdefineret-bræt)__
+ - __[Input og output](#input-og-output)__
+     - __[Vis tekst](#vis-tekst)__
+     - __[Vis terninger](#vis-terninger)__
+     - __[Tag imod et valg](#tag-imod-et-valg)__
+     - __[Tag imod tekst](#tag-imod-tekst)__
+     - __[Tag imod tal](#tag-imod-tal)__
+     - __[Boolsk-knap](#boolsk-knap)__
+     - __[Tekst i centerfeltet](#tekst-i-centerfeltet)__
 
 
 # Import
@@ -67,30 +92,6 @@ Matador GUI'en er et online og offentligt _Maven_ bibliotek (dependency), der ka
 
 
 # Brug af GUI
-
-## Indhold
- - __[JavaDoc i IntelliJ](#javadoc-i-intellij)__
- - __[Start GUI](#start-gui)__  
- - __[Spillere](#spillere)__
-   - __[Opret og tilføj](#opret-og-tilføj)__
-   - __[Ændre balance/point](#ændre-balance/point)__
-   - __[Placer bil](#placer-bil)__
-   - __[Ryk bil](#ryk-bil)__
- - __[Bræt og felter](#bræt-og-felter)__
-     - __[Tilgå felter](#tilgå-felter)__
-     - __[Ændre feltinformationer](#ændre-feltinformationer)__
-     - __[Ejendomme](#ejendomme)__
-     - __[Huse og hoteller](#huse-og-hoteller)__
-     - __[Brugerdefineret bræt](#brugerdefineret-bræt)__
- - __[Input og output](#input-og-output)__
-     - __[Vis tekst](#vis-tekst)__
-     - __[Vis terninger](#vis-terninger)__
-     - __[Tag imod et valg](#tag-imod-et-valg)__
-     - __[Tag imod tekst](#tag-imod-tekst)__
-     - __[Tag imod tal](#tag-imod-tal)__
-     - __[Boolsk-knap](#boolsk-knap)__
-     - __[Tekst i centerfeltet](#tekst-i-centerfeltet)__
-
 
  ## JavaDoc i IntelliJ
  Udover denne guide medfølger der også JavaDoc af de vigtigste metoder i biblioteket. For at tilgå disse, skal du gøre følgende:
