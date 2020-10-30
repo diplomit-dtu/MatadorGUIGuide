@@ -1,6 +1,6 @@
 # Guide til Matador GUI
 
-Dette er en import- og brugsguide til [Matador GUI'en](https://github.com/diplom-dtu/Matador_GUI), der benyttes til CDIO projekterne på første semester.
+Dette er en import- og brugsguide til [Matador GUI'en](https://github.com/diplomit-dtu/Matador_GUI), der benyttes til CDIO projekterne på første semester.
 
 __Eksekverbare eksempler__  
 Repositoriet her er et projekt, der kan klones til IntelliJ, og indeholder forskellige eksekverbare eksempler på brugen af GUI'en i mappen `src/main/java`.
