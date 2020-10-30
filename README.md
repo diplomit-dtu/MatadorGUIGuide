@@ -7,7 +7,7 @@ Repositoriet her er et projekt, der kan klones til IntelliJ, og indeholder forsk
 
 
 # Import
-Matador GUI'en er online og offentligt et _Maven_ bibliotek (dependency), der kan benyttes i et vilkårlig Java-projekt.
+Matador GUI'en er et online og offentligt _Maven_ bibliotek (dependency), der kan benyttes i et vilkårlig Java-projekt:
 
  1. __Opret Projekt__  
     Det forventes at dit projekt er et _Maven_-projekt
@@ -29,7 +29,7 @@ Matador GUI'en er online og offentligt et _Maven_ bibliotek (dependency), der ka
     ```
 
  3. __Indsæt dependency__  
-    Biblioteket indsættes som et dependency ved at kopere følgende ind i `pom.xml` i mellem `<project>` tagsene:
+    Biblioteket indsættes som et dependency ved at kopiere følgende ind i `pom.xml` i mellem `<project>` tagsene:
 
     ```xml
     <dependencies>
@@ -82,9 +82,9 @@ Matador GUI'en er online og offentligt et _Maven_ bibliotek (dependency), der ka
      - __[Ejendomme](#ejendomme)__
      - __[Huse og hoteller](#huse-og-hoteller)__
      - __[Brugerdefineret bræt](#brugerdefineret-bræt)__
- - __[Terning](#terning)__
  - __[Input og output](#input-og-output)__
      - __[Vis tekst](#vis-tekst)__
+     - __[Vis terninger](#vis-terninger)__
      - __[Tag imod et valg](#tag-imod-et-valg)__
      - __[Tag imod tekst](#tag-imod-tekst)__
      - __[Tag imod tal](#tag-imod-tal)__
@@ -104,6 +104,7 @@ Matador GUI'en er online og offentligt et _Maven_ bibliotek (dependency), der ka
  4. Tilgå let dokumentation ved at trykke `CTRL + Q` i Windows og `CTRL + B` 
  på macOS, når du holder musen på en metode eller klasse.
 
+
 ## Start GUI
 _Eksekverbart eksempel: `SimpelStart.java`_
 
@@ -115,42 +116,38 @@ GUI gui = new GUI();
 
 Dette åbner et nyt vindue med en standard Matador-plade.
 
-`GUI`-klassen er den primære klasse i biblioteket, og man opretter kun én per spil. Det er via denne klasse man kan tilføjer spillere, manipulere felter og tage imod inputs og viser outputs.
+`GUI`-klassen er den primære klasse i biblioteket, og man opretter kun én per spil. Det er via denne klasse man kan tilføjer spillere, manipulere felter og tage imod inputs og vise outputs.
 
 
 ## Spillere
 _Eksekverbart eksempel: `OpretSpillere.java`_
 
-En spiller består af et _navn_, en _bil_ og en _balance_ (pengebeholdning/point).  
-Relevante metoder er:
- - `setBalance(..)`
- - `getCar(..)`
-
+En spiller består af et _navn_, en _bil_ og en _balance_ (pengebeholdning/point).
 
 ### Opret og tilføj
-Man tilføjer spillere ved at oprette instanser af `GUI_Player`-klassen, og tilføjer dem til `GUI`.
-
-_Her tilføjes en spiller med navnet _Stephen_ med en start balance (point) på 2000:_
+Man tilføjer spillere ved at oprette instanser af `GUI_Player`-klassen, og tilføjer dem til `GUI`-objektet.
 
 ```java
+// Opretter spiller med navnet Stephen og start balance på 2000
 GUI_Player player = new GUI_Player("Stephen", 2000);
-gui.addPlayer(player1);
-```
 
+// Tilføjer ham til spiller
+gui.addPlayer(player);
+```
 
 ### Ændre balance/point
 En spillers balance/point kan ændres ved at bruge metoden `setBalance(..)` på spillerobjektet.
 
-_Ændrer spillerens balance til 10000:_
 ```java
+// Ændrer spillerens balance til 10000
 player.setBalance(10000);
 ```
 
 ### Placér bil
-En spillers bil/brik er ikke på brættet før den manuelt bliver placeret. Dette gøres ved at hente feltet vi ønsker at placere spilleren på, og benytte feltets `setCar`-metode.
+En spillers bil/brik er ikke på brættet før den manuelt bliver placeret. Dette gøres ved at hente feltet vi ønsker at placere spilleren på (se '[Tilgå felter](#tilgå-felter)'), og benytter feltets `setCar`-metode.
 
-_Her vises Stephens bil på felt 5:_
 ```java
+// Opretter siller
 GUI_Player player = new GUI_Player("Stephen", 2000);
 gui.addPlayer(player);
 
@@ -163,7 +160,7 @@ field.setCar(player, true);
 
 
 ### Ryk bil
-En spillers bil rykkes også med `setCar`-metoden. ___Men___...
+En spillers bil rykkes også med `setCar`-metoden. ___Men!___
 
 En spillers bil kan vises på _flere felter af gangen_. Man skal derfor huske at fjerne spillerens bil fra det gamle felt, før den vises på det nye:
 
@@ -172,33 +169,20 @@ En spillers bil kan vises på _flere felter af gangen_. Man skal derfor huske at
 GUI_Player player = new GUI_Player("Stephen", 2000);
 gui.addPlayer(player);
 
+// Sætter spillerens bil på felt 5 og 6
 gui.getFields()[4].setCar(player, true);
 gui.getFields()[5].setCar(player, true);
-// Forkert: Nu vises spillerns bil både på felt 5 og 6!
+// Forkert: Nu vises spillerns bil på begge felter!
 
 gui.getFields()[4].setCar(player, false);
 // Sådan, nu er bilen fjernet fra felt 5
 ```
 
-
-## Terning
-_Eksekverbart eksempel: `Terning.java`_
-
-Metoderne `setDie(..)` og `setDice(..)` viser hhv. én eller to terninger med givne værdier.  Når terningen/terningerne sættes til nye værdier, fjernes de gamle.
-
-_Vis terninger:_
-```java
-gui.setDie(6); // Viser én terning med værdien 6
-
-gui.setDice(1, 2); // Viser to terninger med værdierne 1 og 2
-```
-
 ## Bræt og felter
 
 ### Tilgå felter
-Man kan tilgå felterne på brættet ved at bruge GUI-objektets `getFields()`-metode. Den returnere et _array_ af felterne, hvor indeks 0 er start feltet.
+Man kan tilgå felterne på brættet ved at bruge `GUI`-objektets `getFields()`-metode. Den returnere et _array_ af felterne, hvor indeks 0 er startfeltet.
 
-_Tilgår startfeltet:_
 ```java
 GUI_Field field;
 
@@ -272,13 +256,13 @@ GUI_Field field = gui.getFields()[1];
 GUI_Street street = (GUI_Street) field;
 ```
 
-Nu kan man ændrer antallet af huse og hoteller:
+Nu kan man ændre antallet af huse og hoteller:
 
  - __Sæt huse:__ `street.setHouses(3)`  
    Der kan maks være 4 huse på en vej, og man kan fjerne husene ved at sætte antallet til 0.
 
  - __Sæt hotel:__ `street.setHotel(true)`  
-    Der kan kun være ét hotel på en vej, og det kan fjernes ved at skrive false i stedet for true.
+    Der kan kun være ét hotel på en vej, og det kan fjernes ved at skrive `false` i stedet for `true`.
     
 
 ### Brugerdefineret bræt
@@ -305,7 +289,7 @@ GUI gui = new GUI(fields);
 ## Input og output
 _Eksekverbart eksempel: `InputOutput.java`_ 
 
-Generelt for alle metoder der tager imod inputs og viser output:
+Alle metoder der tager imod inputs og viser output har følgende tilføldes:
  - De ligger i GUI-objektet
  - De blokere indtil brugeren har taget et valg eller trykket _Ok_
 
@@ -317,11 +301,23 @@ Man kan viser en tekstbesked til brugeren med metoden `showMessage(..)`. Teksten
     gui.showMessage("Hello World");
 ```
 
+
+### Vis terninger
+_Eksekverbart eksempel: `Terning.java`_
+
+Metoderne `setDie(..)` og `setDice(..)` viser hhv. én eller to terninger de med givne værdier.  Når terningen/terningerne sættes til nye værdier, fjernes de gamle.
+
+```java
+gui.setDie(6); // Viser én terning med værdien 6
+
+gui.setDice(1, 2); // Viser to terninger med værdierne 1 og 2
+```
+
 ### Tag imod et valg
 Man kan bede brugere om at vælge mellem flere valgmuligheder med de to metoder:
 
  - __Knapper:__ `getUserButtonPressed(..)`  
-    Beder brugeren om at trykke på en knap:
+    Beder brugeren om at trykke på én af de viste knapper:
 
     ```java
     String chosenButton = gui.getUserButtonPressed(
@@ -341,7 +337,7 @@ Man kan bede brugere om at vælge mellem flere valgmuligheder med de to metoder:
 
 __Fælles for begge metoder er at:__
  - Første argument er beskeden der skal vises til brugeren
- - Alle argumenter derefter er valgmuligheder (teksten i knapper/elementer)
+ - Alle argumenter derefter er valgmuligheder (knapper/elementer)
  - Man kan angive så mange valgmuligheder man har lyst til, og de kan også angives via et array. Dette kaldes _variable arguments_ eller _varargs_ i Java
  - Returværdien er teksten på den valgte knap/element
 
@@ -350,7 +346,7 @@ __Fælles for begge metoder er at:__
 Metoden `getUserString(..)` beder brugeren om at indtaste en vilkårlig tekststreng. 
 
 ```java
-String stringInput = gui.getUserInteger("Enter a number");
+String stringInput = gui.getUserString("Enter some text");
 ```
 
 Returværdien kan være en tom tekstreng, da brugeren kan undlade at indtaste noget.
@@ -371,7 +367,7 @@ Metoden `getUserLeftButtonPressed(..)` beder brugeren om at vælge én af to kna
 
 ```java
 // En Ja/Nej-knap
-boolean yes  = gui.getUserInteger(
+boolean yes  = gui.getUserLeftButtonPressed(
     "Choose yes or no",
     "Yes", "No"
 );
@@ -387,8 +383,8 @@ Udover at centerfeltet bruges til at vise information om et felt der trykkes på
 Her skal man være opmærksom på:
 
  - Standardteksten er '_Prøv lykken_'
- - Teksten vises når der trykkes på centrum
- - Teksten fjernes når musen fjernes fra centrum
+ - Den nuværende tekst vises når der trykkes på centerfeltet
+ - Den nuværende tekst skjules når musen fjernes fra centerfeltet
  - Teksten bevares medmindre den ændres manuelt
 
 __Metoder__  
