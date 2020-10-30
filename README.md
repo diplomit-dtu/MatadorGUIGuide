@@ -193,107 +193,6 @@ gui.setDie(6); // Viser én terning med værdien 6
 gui.setDice(1, 2); // Viser to terninger med værdierne 1 og 2
 ```
 
-## Input og output
-_Eksekverbart eksempel: `InputOutput.java`_ 
-
-Generelt for alle metoder der tager imod inputs og viser output:
- - De ligger i GUI-objektet
- - De blokere indtil brugeren har taget et valg eller trykket _Ok_
-
-
-### Vis tekst
-Man kan viser en tekstbesked til brugeren med metoden `showMessage(..)`. Teksten vises indtil brugeren trykker _OK_ 
-
-```java
-    gui.showMessage("Hello World");
-```
-
-### Tag imod et valg
-Man kan bede brugere om at vælge mellem flere valgmuligheder med de to metoder:
-
- - __Knapper:__ `getUserButtonPressed(..)`  
-    Beder brugeren om at trykke på en knap:
-
-    ```java
-    String chosenButton = gui.getUserButtonPressed(
-        "Click a button",
-        "Button 1", "Button 2"
-    );
-    ```
-
- - __Dropdown-liste__: `getUserSelection(..)`  
-    Beder brugeren om at vælge et element i en dropdown-liste:
-    ```java
-        String chosenElement = gui.getUserSelection(
-            "Choose an element",
-            "Element 1", "Element 2"
-        ); 
-    ```
-
-__Fælles for begge metoder er at:__
- - Første argument er beskeden der skal vises til brugeren
- - Alle argumenter derefter er valgmuligheder (teksten i knapper/elementer)
- - Man kan angive så mange valgmuligheder man har lyst til, og de kan også angives via et array. Dette kaldes _variable arguments_ eller _varargs_ i Java
- - Returværdien er teksten på den valgte knap/element
-
-
-### Tag imod tekst
-Metoden `getUserString(..)` beder brugeren om at indtaste en vilkårlig tekststreng. 
-
-```java
-String stringInput = gui.getUserInteger("Enter a number");
-```
-
-Returværdien kan være en tom tekstreng, da brugeren kan undlade at indtaste noget.
-
-
-### Tag imod tal
-Metoden `getUserInteger(..)` beder brugeren om at indtaste en vilkårlig tal-værdi:
-
-```java
-int numberInput = gui.getUserInteger("Enter a number");
-```
-
-___OBS:___ Man kan angive et grænse for værdierne brugeren kan indtaste, men dette anbefales __ikke__ da der er en bug i metoden på nuværende tidspunkt.
-
-
-### Boolsk-knap
-Metoden `getUserLeftButtonPressed(..)` beder brugeren om at vælge én af to knapper, og returnere en _boolean_ værdi i stedet for tekst:
-
-```java
-boolean yes  = gui.getUserInteger(
-    "Choose yes or no",
-    "Yes", "No"
-);
-```
-
-Returværdien er _true_ hvis den venstre knap ("Yes" i ovenstående tilfælde) vælges, og _false_ hvis den højre knap vælges.
-
-
-### Tekst i centerfeltet
-_Eksekverbart eksempel: `Centerfelt.java`_ 
-
-Udover at centerfeltet bruges til at vise information om et felt der trykkes på, så kan det vise vilkårlig tekst. 
-Her skal man være opmærksom på:
-
- - Standardteksten er '_Prøv lykken_'
- - Teksten vises når der trykkes på centrum
- - Teksten fjernes når musen fjernes fra centrum
- - Teksten bevares medmindre den ændres manuelt
-
-__Metoder__  
-Man kan bruge følgende metoder for at ændre/vise teksten:
-
- - `gui.setChanceCard("My message")`  
-   Sætter teksten i centerfelter til '_My message_'
-
- - `gui.displayChanceCard()`  
-   Viser teksten der står i centerfeltet  
-
- - `gui.displayChanceCard('_My message_')`  
-   Kombinere ovenstående, og sætter teksten til '_My message_' og viser teksten der står i centerfeltet.
-
-
 ## Bræt og felter
 
 ### Tilgå felter
@@ -401,3 +300,105 @@ GUI_Field[] fields = {
 
 GUI gui = new GUI(fields);
 ```
+
+
+## Input og output
+_Eksekverbart eksempel: `InputOutput.java`_ 
+
+Generelt for alle metoder der tager imod inputs og viser output:
+ - De ligger i GUI-objektet
+ - De blokere indtil brugeren har taget et valg eller trykket _Ok_
+
+
+### Vis tekst
+Man kan viser en tekstbesked til brugeren med metoden `showMessage(..)`. Teksten vises indtil brugeren trykker _OK_ 
+
+```java
+    gui.showMessage("Hello World");
+```
+
+### Tag imod et valg
+Man kan bede brugere om at vælge mellem flere valgmuligheder med de to metoder:
+
+ - __Knapper:__ `getUserButtonPressed(..)`  
+    Beder brugeren om at trykke på en knap:
+
+    ```java
+    String chosenButton = gui.getUserButtonPressed(
+        "Click a button",
+        "Button 1", "Button 2"
+    );
+    ```
+
+ - __Dropdown-liste__: `getUserSelection(..)`  
+    Beder brugeren om at vælge et element i en dropdown-liste:
+    ```java
+        String chosenElement = gui.getUserSelection(
+            "Choose an element",
+            "Element 1", "Element 2"
+        ); 
+    ```
+
+__Fælles for begge metoder er at:__
+ - Første argument er beskeden der skal vises til brugeren
+ - Alle argumenter derefter er valgmuligheder (teksten i knapper/elementer)
+ - Man kan angive så mange valgmuligheder man har lyst til, og de kan også angives via et array. Dette kaldes _variable arguments_ eller _varargs_ i Java
+ - Returværdien er teksten på den valgte knap/element
+
+
+### Tag imod tekst
+Metoden `getUserString(..)` beder brugeren om at indtaste en vilkårlig tekststreng. 
+
+```java
+String stringInput = gui.getUserInteger("Enter a number");
+```
+
+Returværdien kan være en tom tekstreng, da brugeren kan undlade at indtaste noget.
+
+
+### Tag imod tal
+Metoden `getUserInteger(..)` beder brugeren om at indtaste en vilkårlig tal-værdi:
+
+```java
+int numberInput = gui.getUserInteger("Enter a number");
+```
+
+___OBS:___ Man kan angive et grænse for værdierne brugeren kan indtaste, men dette anbefales __ikke__ da der er en bug i metoden på nuværende tidspunkt.
+
+
+### Boolsk-knap
+Metoden `getUserLeftButtonPressed(..)` beder brugeren om at vælge én af to knapper, og returnere en _boolean_ værdi i stedet for tekst:
+
+```java
+// En Ja/Nej-knap
+boolean yes  = gui.getUserInteger(
+    "Choose yes or no",
+    "Yes", "No"
+);
+```
+
+Returværdien er _true_ hvis den venstre knap ("Yes" i ovenstående tilfælde) vælges, og _false_ hvis den højre knap vælges.
+
+
+### Tekst i centerfeltet
+_Eksekverbart eksempel: `Centerfelt.java`_ 
+
+Udover at centerfeltet bruges til at vise information om et felt der trykkes på, så kan det vise vilkårlig tekst. 
+Her skal man være opmærksom på:
+
+ - Standardteksten er '_Prøv lykken_'
+ - Teksten vises når der trykkes på centrum
+ - Teksten fjernes når musen fjernes fra centrum
+ - Teksten bevares medmindre den ændres manuelt
+
+__Metoder__  
+Man kan bruge følgende metoder for at ændre/vise teksten:
+
+ - `gui.setChanceCard("My message")`  
+   Sætter teksten i centerfelter til '_My message_'
+
+ - `gui.displayChanceCard()`  
+   Viser teksten der står i centerfeltet  
+
+ - `gui.displayChanceCard('_My message_')`  
+   Kombinere ovenstående, og sætter teksten til '_My message_' og viser teksten der står i centerfeltet.
