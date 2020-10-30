@@ -234,15 +234,18 @@ GUI_Ownable ownable = (GUI_Ownable) field;
 
 De fælles metoder er:
 
- - __Sæt pris:__ `setSubText("Pris: 1000")`  
+ - __Sæt pris:__ `ownable.setSubText("Pris: 1000")`  
     Ejendomme benytter undertitlen til sin pris, og prisen kan derfor ændres med denne metode.
 
- - __Sæt ejer:__ `setOwnerName("Albert")`  
+ - __Sæt ejer:__ `ownable.setOwnerName("Albert")`  
     Sætter navnet på spilleren, der ejer feltet. Brug `setOwnerName(null)` for at fjerne nuværende ejer.  
     Når et felt er ejet, vil der vises yderligere information om feltet i centerfeltet, når der trykkes på felter, såsom ejerens navn og leje.
 
- - __Sæt leje:__ `setRent("1000")`  
+ - __Sæt leje:__ `ownable.setRent("1000")`  
     Sætter lejen på feltet, som vises i centerfeltet, når der trykkes feltet, og feltet har en ejer.
+
+ - __Sæt kantfarve:__ `ownable.setBorder(Color.GREEN)`  
+    Dette kan eventuelt benyttes til at markere hvem der ejer et felt.
     
 
 
