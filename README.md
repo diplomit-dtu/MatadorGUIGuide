@@ -1,4 +1,4 @@
-# Guide til Matador GUI
+# Guide til Matador GUI 3.1.7
 
 Dette er en import- og brugsguide til [Matador GUI'en](https://github.com/diplomit-dtu/Matador_GUI), der benyttes til CDIO projekterne på første semester.
 
@@ -400,5 +400,5 @@ Man kan bruge følgende metoder for at ændre/vise teksten:
  - `gui.displayChanceCard()`  
    Viser teksten der står i centerfeltet  
 
- - `gui.displayChanceCard('_My message_')`  
+ - `gui.displayChanceCard("_My message_")`  
    Kombinere ovenstående, og sætter teksten til '_My message_' og viser teksten der står i centerfeltet.
