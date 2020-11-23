@@ -6,5 +6,7 @@ Hver guide er specifik til en bestemt version af GUI'en, og hver guide er på si
 
 ### Versioner
 
+ - [3.2.x](https://github.com/diplomit-dtu/MatadorGUIGuide/tree/3.2.x)
+
  - [3.1.7](https://github.com/diplomit-dtu/MatadorGUIGuide/tree/3.1.7)
  
