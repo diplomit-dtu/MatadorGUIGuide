@@ -1,4 +1,4 @@
-# Guide til Matador GUI 3.1.7
+# Guide til Matador GUI 3.2.x
 
 Dette er en import- og brugsguide til [Matador GUI'en](https://github.com/diplomit-dtu/Matador_GUI), der benyttes til CDIO projekterne på første semester.
 
@@ -6,6 +6,7 @@ __Eksekverbare eksempler__
 Repositoriet her er et projekt, der kan klones til IntelliJ, og indeholder forskellige eksekverbare eksempler på brugen af GUI'en i mappen `src/main/java`.
 
 ## Indhold
+__[Ændringer i denne version](#ændringer-i-denne-version)__
 __[Import](#import)__  
 __[Brug af GUI](#brug-af-gui)__
  - __[JavaDoc i IntelliJ](#javadoc-i-intellij)__
@@ -13,8 +14,7 @@ __[Brug af GUI](#brug-af-gui)__
  - __[Spillere](#spillere)__
    - __[Opret og tilføj](#opret-og-tilføj)__
    - __[Ændre balance/point](#ændre-balance/point)__
-   - __[Placer bil](#placer-bil)__
-   - __[Ryk bil](#ryk-bil)__
+   - __[Placér og ryk bil](#placér-og-ryk-bil)__
  - __[Bræt og felter](#bræt-og-felter)__
      - __[Tilgå felter](#tilgå-felter)__
      - __[Ændre feltinformationer](#ændre-feltinformationer)__
@@ -30,6 +30,8 @@ __[Brug af GUI](#brug-af-gui)__
      - __[Boolsk-knap](#boolsk-knap)__
      - __[Tekst i centerfeltet](#tekst-i-centerfeltet)__
 
+# Ændringer i denne version
+Du kan se ændringer for _alle_ versioner i changeloggen for biblioteket lige [her](https://github.com/diplomit-dtu/Matador_GUI/blob/master/CHANGELOG.md)
 
 # Import
 Matador GUI'en er et online og offentligt _Maven_ bibliotek (dependency), der kan benyttes i et vilkårlig Java-projekt:
@@ -61,7 +63,7 @@ Matador GUI'en er et online og offentligt _Maven_ bibliotek (dependency), der ka
         <dependency>
             <groupId>diplomitdtu</groupId>
             <artifactId>matadorgui</artifactId>
-            <version>3.1.7</version>
+            <version>3.2.0</version>
         </dependency>
     </dependencies>
     ``` 
@@ -144,40 +146,25 @@ En spillers balance/point kan ændres ved at bruge metoden `setBalance(..)` på 
 player.setBalance(10000);
 ```
 
-### Placér bil
-En spillers bil/brik er ikke på brættet før den manuelt bliver placeret. Dette gøres ved at hente feltet vi ønsker at placere spilleren på (se '[Tilgå felter](#tilgå-felter)'), og benytter feltets `setCar`-metode.
+### Placér og ryk bil
+_Eksekverbart eksempel: `FlytBil.java`_
+
+En spillers bil/brik rykkes ved spillerens bil, og sætte dens positions:
 
 ```java
 // Opretter spiller
 GUI_Player player = new GUI_Player("Stephen", 2000);
 gui.addPlayer(player);
 
-// Henter feltet
+// Henter feltet vi vil rykke til 
 GUI_Field field = gui.getFields()[4];
 
-// Sæt bilen til at blive vist
-field.setCar(player, true);
+// Placér/ryk bilen
+player.getCar().setPosition(field);
 ```
 
+Bemærk, at spillerens bil er ikke placeret på brættet til at starte med.
 
-### Ryk bil
-En spillers bil rykkes også med `setCar`-metoden. ___Men!___
-
-En spillers bil kan vises på _flere felter af gangen_. Man skal derfor huske at fjerne spillerens bil fra det gamle felt, før den vises på det nye:
-
-
-```java
-GUI_Player player = new GUI_Player("Stephen", 2000);
-gui.addPlayer(player);
-
-// Sætter spillerens bil på felt 5 og 6
-gui.getFields()[4].setCar(player, true);
-gui.getFields()[5].setCar(player, true);
-// Forkert: Nu vises spillerns bil på begge felter!
-
-gui.getFields()[4].setCar(player, false);
-// Sådan, nu er bilen fjernet fra felt 5
-```
 
 ## Bræt og felter
 
@@ -347,24 +334,51 @@ __Fælles for begge metoder er at:__
 
 
 ### Tag imod tekst
-Metoden `getUserString(..)` beder brugeren om at indtaste en vilkårlig tekststreng. 
+Metoden `getUserString(..)` beder brugeren om at indtaste en vilkårlig tekststreng. Den kommer i _to_ udgaver (overloads):
+
+ 1. `getUserString(String msg)`  
+    Beder brugeren om at indtaste en __ikke tom__ tekstreng, der __gerne må indeholde mellemrum__
+
+ 2. `getUserString(String msg, int minLength, int maxLength, boolean allowWhitespace)`  
+    Beder brugeren om at indtaste en tekstrengt der er mellem `minLength` og `maxLength` lang, og som kun må indeholde whitespace (mellemrum, tabs, linjeskift), hvis `allowWhitespace` er sat til false.
 
 ```java
-String stringInput = gui.getUserString("Enter some text");
-```
+String input;
 
-Returværdien kan være en tom tekststreng, da brugeren kan undlade at indtaste noget.
+// Indlæser simpel tekststreng fra brugeren
+input = gui.getUserString("Enter some text");
+
+// Indlæser tekststreng der gerne må være tom, men ikke må indeholde mellemrum
+input = gui.getUserString("Enter some text", 0, 100, false);
+
+// Indlæser tekststreng der skal være præcis 6 lang, men gerne må indeholde mellemrum
+input = gui.getUserString("Enter some text", 6, 6, true);
+```
 
 
 ### Tag imod tal
-Metoden `getUserInteger(..)` beder brugeren om at indtaste en vilkårlig tal-værdi:
+Metoden `getUserInteger(..)` beder brugeren om at indtaste tal værdi. Den kommer i _to_ udgaver (overloads):
+
+ 1. `getUserInteger(String message)`  
+    Indlæser vilkårlig integer (både positive og negative)
+
+ 2. `getUserInteger(String message, int minValue, int maxValue)`  
+    Indlæster en integer der er mellen `minValue` og `maxValue`
+    
+Eksempel:
 
 ```java
-int numberInput = gui.getUserInteger("Enter a number");
+int numberInput;
+
+// Indlæser et vilkårligt tal
+numberInput = gui.getUserInteger("Enter a number");
+
+// Indlæser et tal mellem 2 og 6
+numberInput = gui.getUserInteger("Enter a number", 2, 6);
+
+// Indlæser et tal, der skal være positivt
+numberInput = gui.getUserInteger("Enter a number", 1, Integer.MAX_VALUE);
 ```
-
-___OBS:___ Man kan angive en grænse for værdierne brugeren kan indtaste, men dette anbefales __ikke__ da der er en bug i metoden på nuværende tidspunkt.
-
 
 ### Boolsk-knap
 Metoden `getUserLeftButtonPressed(..)` beder brugeren om at vælge én af to knapper, og returnerer en _boolean_ værdi i stedet for _string_:

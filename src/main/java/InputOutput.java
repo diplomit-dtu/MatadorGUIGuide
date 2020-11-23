@@ -55,8 +55,6 @@ public class InputOutput {
                         "Metode: gui.getUserInteger(..)  -  Indtast et tal"
                 ));
 
-            // OBS: Brug ikke denne - man kan forbi grænsen ved at trykke 'enter',
-            // når man har skrevet sin værdi
             // Tager i mod et til mellem de to værdir
             if( valg.equals("Tal med grænser") )
                 output = String.valueOf(gui.getUserInteger(
