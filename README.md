@@ -63,7 +63,7 @@ Matador GUI'en er et online og offentligt _Maven_ bibliotek (dependency), der ka
         <dependency>
             <groupId>diplomitdtu</groupId>
             <artifactId>matadorgui</artifactId>
-            <version>3.2.0</version>
+            <version>3.2.1</version>
         </dependency>
     </dependencies>
     ``` 
